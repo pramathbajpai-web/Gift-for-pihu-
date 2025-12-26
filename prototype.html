@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You are special!</title>
+    <style>
+        :root {
+            --primary-pink: #ff4d94;
+            --bg-dark: #0d0d0d;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .container { width: 90%; max-width: 400px; padding: 20px; z-index: 1; }
+        .hidden { display: none; }
+
+        .heart-bg {
+            position: absolute;
+            color: rgba(255, 77, 148, 0.3);
+            animation: floatUp 4s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) scale(0); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+
+        #meter-container {
+            width: 100%;
+            height: 25px;
+            background: #222;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 2px solid #333;
+        }
+
+        #progress-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #ff4d94, #ff0066);
+            border-radius: 15px;
+            transition: width 0.1s;
+        }
+
+        .btn {
+            background: var(--primary-pink);
+            border: none;
+            padding: 12px 25px;
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            margin-top: 15px;
+        }
+
+        .reveal-box {
+            background: #1a1a1a;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border: 1px solid #333;
+            cursor: pointer;
+        }
+
+        .note-card {
+            background: white;
+            color: #333;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(255, 77, 148, 0.4);
+        }
+
+        .image-container {
+            margin-bottom: 20px;
+        }
+
+        .footer-copyright {
+            position: fixed;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="step1" class="container">
+        <div class="image-container">
+            <span style="font-size: 80px;">💖</span>
+        </div>
+        <h1 style="font-size: 2.5rem;">Hey Beautiful</h1>
+        <p>Do you even know how cute you are my princess Jagriti?</p>
+        <button class="btn" onclick="startMeter()">Open My Heart 💖</button>
+    </div>
+
+    <div id="step2" class="container hidden">
+        <h2 id="status">Measuring your cuteness...</h2>
+        <div id="meter-container"><div id="progress-fill"></div></div>
+        <h1 id="percent">0%</h1>
+        <p id="warning" class="hidden" style="color: var(--primary-pink);">⚠️ WARNING: TOO CUTE TO HANDLE!</p>
+    </div>
+
+    <div id="step3" class="container hidden">
+        <h2>Just for you miss </h2>
+        <p>Tap each one from starting to reveal</p>
+        <div class="reveal-box" onclick="this.innerHTML='You look adorable my Pihu'">💝</div>
+        <div class="reveal-box" onclick="this.innerHTML='You are the sweetest person for me'">💝</div>
+        <div class="reveal-box" onclick="this.innerHTML='You make things feel lighter'">💝</div>
+        <div class="reveal-box" onclick="this.innerHTML='U R the cutest person in my life'">💝</div>
+        <button class="btn" onclick="showNote()">See more →</button>
+    </div>
+
+    <div id="step4" class="container hidden">
+        <div class="note-card">
+            <h3 style="color: #ff4d94;">A little note for you</h3>
+           <p>What makes you so lovely...Ur cuteness,ur smile,ur talking style and so on btw I am really sorry for all my mistakes which i have done in past and at the end I love u so much my cutie pie princess Pihu 🫶.</p>
+
+    
+
+    <p><strong>You'll always be special to me Jagriti 💖.</strong></p>
+
+  
+
+    <h3 style="color: #00acee;">
+        Now go and thanks to MR. Pramath for creating this for her BSF! 
+        Btw i have puted sky blue colour on this text bcz it will be mine fav colour always note ur ohk miss 😂
+
+    </h3>
+
+</div>
+    </div>
+
+    <div class="footer-copyright">
+        © 2025 Pramath Bajpai. All Rights Reserved.
+    </div>
+
+    <script>
+        function startMeter() {
+            document.getElementById('step1').classList.add('hidden');
+            document.getElementById('step2').classList.remove('hidden');
+            let p = 0;
+            let interval = setInterval(() => {
+                p++;
+                let fill = document.getElementById('progress-fill');
+                let perc = document.getElementById('percent');
+                if(fill) fill.style.width = (p > 100 ? 100 : p) + "%";
+                if(perc) perc.innerText = p + "%";
+                if (p === 120) {
+                    clearInterval(interval);
+                    document.getElementById('warning').classList.remove('hidden');
+                    setTimeout(() => {
+                        document.getElementById('step2').classList.add('hidden');
+                        document.getElementById('step3').classList.remove('hidden');
+                    }, 2000);
+                }
+            }, 40);
+        }
+
+        function showNote() {
+            document.getElementById('step3').classList.add('hidden');
+            document.getElementById('step4').classList.remove('hidden');
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-bg');
+            heart.innerHTML = '💖';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 4000);
+        }
+        setInterval(createHeart, 400);
+    </script>
+</body>
+</html>
